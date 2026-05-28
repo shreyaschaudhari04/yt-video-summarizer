@@ -137,8 +137,8 @@ exportPdfBtn.addEventListener("click", async () => {
         pdfDate.textContent =
             new Date().toLocaleString();
 
-        pdfContent.textContent =
-            activeTabContent;
+        pdfContent.innerHTML =
+            marked.parse(activeTabContent);
 
         // HTML -> CANVAS
         const canvas = await html2canvas(pdfTemplate, {

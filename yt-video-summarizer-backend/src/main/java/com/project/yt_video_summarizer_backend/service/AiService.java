@@ -165,37 +165,101 @@ public class AiService {
 
             case "notes":
                 return """
-                        Create detailed, well-structured notes.
-                        - Use headings and subheadings
-                        - Explain clearly
-                        - Keep it student-friendly
-                        - Use bullet points where needed
+                        Convert the transcript into professional study notes.
+                        
+                        Requirements:
+                        - Use markdown headings and subheadings
+                        - Use descriptive bullet points
+                        - Explain concepts clearly
+                        - Add structure and logical grouping
+                        - Avoid giant paragraphs
+                        - Keep notes educational and revision-friendly
+                        - Expand important ideas when needed
+                        - Make it visually organized
+                        
+                        Example:
+                        
+                        # Topic Name
+                        - Detailed explanation
+                        - Important concept
+                        
+                        ## Subtopic
+                        - Important detail
+                        - Important detail
                         """;
 
             case "key_takeaways":
                 return """
-                        Extract only the most important takeaways.
-                        - Keep it concise
-                        - Focus only on the core learnings
-                        - Use bullet points
+                        Extract the most important insights from the transcript.
+                        
+                        Requirements:
+                        - Use markdown headings
+                        - Use meaningful bullet points
+                        - Keep points concise but informative
+                        - Focus on practical learning
+                        - Organize takeaways by topic
+                        - Avoid vague statements
+                        
+                        Example:
+                        
+                        # Key Learnings
+                        - Important insight
+                        - Important insight
+                        
+                        # Practical Ideas
+                        - Important takeaway
                         """;
 
             case "exam_prep":
                 return """
-                        Convert this into exam preparation format.
+                        Create detailed exam preparation notes.
+                        
+                        Requirements:
+                        - Use markdown headings
+                        - Organize by concepts/topics
+                        - Use descriptive bullet points
                         - Highlight important concepts
-                        - Mention possible exam-relevant points
-                        - Make it easy for revision
-                        - Use bullet points and mini headings
+                        - Make content revision-friendly
+                        - Include important definitions where useful
+                        - Expand key ideas clearly
+                        - Avoid giant paragraphs
+                        
+                        Example:
+                        
+                        # Important Concepts
+                        - Detailed explanation
+                        - Key revision point
+                        
+                        # Definitions
+                        - Important term explanation
+                        
+                        # Key Points
+                        - Important exam-oriented note
                         """;
 
             case "summary":
             default:
                 return """
-                        Summarize into short, clear bullet points.
-                        - Keep it concise
-                        - Focus on the main ideas only
+                        Create detailed but concise study notes.
+                        
+                        Requirements:
+                        - Use proper markdown headings
                         - Use bullet points
+                        - Explain ideas clearly
+                        - Keep information descriptive
+                        - Avoid one-line shallow points
+                        - Make it easy to revise later
+                        - Organize content into sections
+                        
+                        Example format:
+                        
+                        # Introduction
+                        - Detailed explanation point
+                        - Another important point
+                        
+                        # Main Concepts
+                        - Explanation
+                        - Explanation
                         """;
         }
     }

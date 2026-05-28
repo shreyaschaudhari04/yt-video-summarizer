@@ -5,49 +5,75 @@
 }
 
 body {
-    width: 430px;
-    min-height: 650px;
+    width: 460px;
+    min-height: 700px;
 
     font-family: Arial, sans-serif;
 
     background: #0f172a;
 
     color: white;
+
+    overflow-x: hidden;
 }
 
 .app {
     padding: 18px;
 }
 
+/* HEADER */
+
 .header {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .header h1 {
-    font-size: 24px;
-    margin-bottom: 6px;
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #60a5fa,
+        #a78bfa
+    );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
 }
 
 .header p {
     color: #94a3b8;
+
     font-size: 14px;
-    line-height: 1.4;
+
+    line-height: 1.6;
 }
+
+/* MAIN CARD */
 
 .card {
     background: #111827;
 
     border: 1px solid #1e293b;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
-    padding: 16px;
+    padding: 18px;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.3);
 }
 
+/* FIELDS */
+
 .field {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 label {
@@ -57,15 +83,17 @@ label {
 
     font-size: 14px;
 
+    font-weight: 600;
+
     color: #cbd5e1;
 }
 
 select {
     width: 100%;
 
-    padding: 12px;
+    padding: 13px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     border: 1px solid #334155;
 
@@ -76,20 +104,27 @@ select {
     font-size: 14px;
 
     outline: none;
+
+    transition: 0.2s;
 }
 
 select:focus {
     border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59,130,246,0.2);
 }
+
+/* GENERATE BUTTON */
 
 #generateBtn {
     width: 100%;
 
-    padding: 14px;
+    padding: 15px;
 
     border: none;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     background: linear-gradient(
         135deg,
@@ -105,20 +140,25 @@ select:focus {
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: 0.25s;
 }
 
 #generateBtn:hover {
-    opacity: 0.92;
+    transform: translateY(-1px);
+
+    opacity: 0.95;
 }
 
 #generateBtn:disabled {
     opacity: 0.6;
+
     cursor: not-allowed;
 }
 
+/* LOADING */
+
 .loading {
-    margin-top: 14px;
+    margin-top: 16px;
 
     text-align: center;
 
@@ -131,12 +171,14 @@ select:focus {
     display: none;
 }
 
+/* TABS */
+
 .tabs {
     display: flex;
 
     gap: 10px;
 
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
 .tab {
@@ -148,15 +190,21 @@ select:focus {
 
     color: #cbd5e1;
 
-    padding: 12px;
+    padding: 13px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     cursor: pointer;
 
     font-size: 13px;
 
-    transition: 0.2s;
+    font-weight: 600;
+
+    transition: 0.25s;
+}
+
+.tab:hover {
+    background: #334155;
 }
 
 .tab.active {
@@ -169,54 +217,75 @@ select:focus {
     color: white;
 }
 
+/* CONTENT CARD */
+
 .content-card {
     background: #111827;
 
     border: 1px solid #1e293b;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
-    padding: 16px;
+    padding: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.3);
 }
+
+/* ACTION BUTTONS */
 
 .content-actions {
     display: flex;
 
     justify-content: flex-end;
 
-    margin-bottom: 12px;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
 }
 
-#copyBtn {
+#copyBtn,
+#exportTxtBtn,
+#exportPdfBtn {
     background: #1e293b;
 
     border: 1px solid #334155;
 
     color: white;
 
-    padding: 8px 14px;
+    padding: 10px 15px;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
     cursor: pointer;
 
     font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
 }
 
-#copyBtn:hover {
+#copyBtn:hover,
+#exportTxtBtn:hover,
+#exportPdfBtn:hover {
     background: #334155;
 }
+
+/* TAB CONTENT */
 
 .tab-content {
     display: none;
 
-    max-height: 380px;
+    max-height: 430px;
 
     overflow-y: auto;
 
-    white-space: pre-wrap;
+    padding-right: 6px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
     font-size: 14px;
 
@@ -227,116 +296,258 @@ select:focus {
     display: block;
 }
 
-#exportTxtBtn {
-    background: #1e293b;
+/* SCROLLBAR */
 
-    border: 1px solid #334155;
+.tab-content::-webkit-scrollbar {
+    width: 8px;
+}
 
-    color: white;
-
-    padding: 8px 14px;
+.tab-content::-webkit-scrollbar-thumb {
+    background: #334155;
 
     border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    margin-left: 8px;
 }
 
-#exportTxtBtn:hover {
-    background: #334155;
+/* MARKDOWN RENDERING */
+
+.tab-content h1 {
+    font-size: 25px;
+
+    margin-top: 28px;
+
+    margin-bottom: 18px;
+
+    color: #60a5fa;
+
+    border-bottom: 2px solid #2563eb;
+
+    padding-bottom: 8px;
 }
 
-#exportPdfBtn {
+.tab-content h2 {
+    font-size: 21px;
+
+    margin-top: 24px;
+
+    margin-bottom: 15px;
+
+    color: #93c5fd;
+}
+
+.tab-content h3 {
+    font-size: 18px;
+
+    margin-top: 20px;
+
+    margin-bottom: 12px;
+
+    color: #bfdbfe;
+}
+
+.tab-content p {
+    margin-bottom: 14px;
+
+    line-height: 1.9;
+
+    color: #e2e8f0;
+}
+
+.tab-content ul {
+    padding-left: 24px;
+
+    margin-bottom: 20px;
+}
+
+.tab-content li {
+    margin-bottom: 10px;
+
+    line-height: 1.8;
+
+    color: #e2e8f0;
+}
+
+.tab-content strong {
+    color: white;
+}
+
+.tab-content blockquote {
+    border-left: 4px solid #2563eb;
+
+    padding-left: 14px;
+
+    margin: 18px 0;
+
+    color: #cbd5e1;
+
+    font-style: italic;
+}
+
+.tab-content code {
     background: #1e293b;
 
-    border: 1px solid #334155;
+    padding: 3px 7px;
 
-    color: white;
+    border-radius: 6px;
 
-    padding: 8px 14px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    margin-left: 8px;
+    color: #93c5fd;
 }
 
-#exportPdfBtn:hover {
-    background: #334155;
+.tab-content hr {
+    border: none;
+
+    border-top: 1px solid #334155;
+
+    margin: 26px 0;
 }
+
+/* PDF TEMPLATE */
 
 .pdf-template {
-    width: 800px;
+    width: 900px;
 
     background: white;
 
     color: #111827;
 
-    padding: 40px;
+    padding: 50px;
 
     position: absolute;
 
-    left: -9999px;
+    left: -99999px;
 
     top: 0;
 }
 
+/* PDF HEADER */
+
 .pdf-header {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 
-    border-bottom: 2px solid #2563eb;
+    border-bottom: 3px solid #2563eb;
 
-    padding-bottom: 16px;
+    padding-bottom: 18px;
 }
 
 .pdf-header h1 {
-    font-size: 32px;
+    font-size: 36px;
 
     color: #2563eb;
 
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .pdf-header p {
     color: #64748b;
 
-    font-size: 16px;
+    font-size: 17px;
 }
+
+/* PDF META */
 
 .pdf-meta {
     display: flex;
 
     justify-content: space-between;
 
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 
     background: #f1f5f9;
 
-    padding: 16px;
+    padding: 18px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     font-size: 14px;
 }
 
+/* PDF CONTENT */
+
 .pdf-content {
     font-size: 15px;
 
-    line-height: 1.8;
-
-    white-space: pre-wrap;
+    line-height: 1.9;
 
     color: #1e293b;
 }
 
+/* PDF HEADINGS */
+
+.pdf-content h1 {
+    font-size: 30px;
+
+    color: #2563eb;
+
+    margin-top: 32px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 2px solid #2563eb;
+
+    padding-bottom: 8px;
+}
+
+.pdf-content h2 {
+    font-size: 24px;
+
+    color: #1d4ed8;
+
+    margin-top: 26px;
+
+    margin-bottom: 16px;
+}
+
+.pdf-content h3 {
+    font-size: 20px;
+
+    color: #334155;
+
+    margin-top: 22px;
+
+    margin-bottom: 14px;
+}
+
+/* PDF TEXT */
+
+.pdf-content p {
+    margin-bottom: 16px;
+
+    line-height: 1.9;
+}
+
+.pdf-content ul {
+    padding-left: 26px;
+
+    margin-bottom: 20px;
+}
+
+.pdf-content li {
+    margin-bottom: 12px;
+
+    line-height: 1.8;
+}
+
+.pdf-content strong {
+    color: black;
+}
+
+/* PDF BLOCKQUOTE */
+
+.pdf-content blockquote {
+    border-left: 4px solid #2563eb;
+
+    padding-left: 16px;
+
+    margin: 20px 0;
+
+    color: #475569;
+
+    font-style: italic;
+}
+
+/* PDF FOOTER */
+
 .pdf-footer {
-    margin-top: 40px;
+    margin-top: 50px;
 
     text-align: center;
 
