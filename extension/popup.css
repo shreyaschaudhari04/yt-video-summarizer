@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 430px;
+    min-height: 650px;
+
+    font-family: Arial, sans-serif;
+
+    background: #0f172a;
+
+    color: white;
+}
+
+.app {
+    padding: 18px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.header p {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.card {
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 18px;
+
+    padding: 16px;
+
+    margin-bottom: 20px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    color: #cbd5e1;
+}
+
+select {
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    border: 1px solid #334155;
+
+    background: #0f172a;
+
+    color: white;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+select:focus {
+    border-color: #3b82f6;
+}
+
+#generateBtn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#generateBtn:hover {
+    opacity: 0.92;
+}
+
+#generateBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loading {
+    margin-top: 14px;
+
+    text-align: center;
+
+    color: #93c5fd;
+
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+.tabs {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.tab {
+    flex: 1;
+
+    border: none;
+
+    background: #1e293b;
+
+    color: #cbd5e1;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.tab.active {
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: white;
+}
+
+.content-card {
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 18px;
+
+    padding: 16px;
+}
+
+.content-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-bottom: 12px;
+}
+
+#copyBtn {
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+#copyBtn:hover {
+    background: #334155;
+}
+
+.tab-content {
+    display: none;
+
+    max-height: 380px;
+
+    overflow-y: auto;
+
+    white-space: pre-wrap;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    color: #e2e8f0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#exportTxtBtn {
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    margin-left: 8px;
+}
+
+#exportTxtBtn:hover {
+    background: #334155;
+}
+
+#exportPdfBtn {
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    margin-left: 8px;
+}
+
+#exportPdfBtn:hover {
+    background: #334155;
+}
+
+.pdf-template {
+    width: 800px;
+
+    background: white;
+
+    color: #111827;
+
+    padding: 40px;
+
+    position: absolute;
+
+    left: -9999px;
+
+    top: 0;
+}
+
+.pdf-header {
+    margin-bottom: 30px;
+
+    border-bottom: 2px solid #2563eb;
+
+    padding-bottom: 16px;
+}
+
+.pdf-header h1 {
+    font-size: 32px;
+
+    color: #2563eb;
+
+    margin-bottom: 8px;
+}
+
+.pdf-header p {
+    color: #64748b;
+
+    font-size: 16px;
+}
+
+.pdf-meta {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+
+    background: #f1f5f9;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+.pdf-content {
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    color: #1e293b;
+}
+
+.pdf-footer {
+    margin-top: 40px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #64748b;
+}

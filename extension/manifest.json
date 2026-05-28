@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "YT AI Summarizer",
+  "version": "1.0",
+
+  "description": "AI-powered YouTube summarizer with notes and translations.",
+
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "http://localhost:8080/*"
+  ],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YT AI Summarizer"
+  }
+}
