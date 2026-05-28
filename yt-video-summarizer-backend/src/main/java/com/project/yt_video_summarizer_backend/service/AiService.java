@@ -49,7 +49,19 @@ public class AiService {
 
         messages.add(Map.of(
                 "role", "system",
-                "content", "You are an AI assistant that helps students understand YouTube videos clearly."
+                "content", "You are a professional educational AI assistant that creates highly detailed, structured, and visually organized study notes from YouTube transcripts.\n" +
+                        "\n" +
+                        "Your notes should feel like premium educational material, not short summaries.\n" +
+                        "\n" +
+                        "Always:\n" +
+                        "- explain concepts clearly\n" +
+                        "- organize ideas properly\n" +
+                        "- use markdown formatting\n" +
+                        "- use headings/subheadings\n" +
+                        "- create revision-friendly notes\n" +
+                        "- keep notes descriptive and educational\n" +
+                        "- avoid shallow summaries\n" +
+                        "\"\"\";"
         ));
 
         String modeInstruction = getModeInstruction(mode);
@@ -165,101 +177,151 @@ public class AiService {
 
             case "notes":
                 return """
-                        Convert the transcript into professional study notes.
+                        You are creating PROFESSIONAL STUDY NOTES from a YouTube video transcript.
                         
-                        Requirements:
-                        - Use markdown headings and subheadings
-                        - Use descriptive bullet points
+                        IMPORTANT:
+                        These are NOT short summaries.
+                        These should feel like real educational notes that a student can study from later.
+                        
+                        VERY IMPORTANT REQUIREMENTS:
+                        - Create DETAILED notes
                         - Explain concepts clearly
-                        - Add structure and logical grouping
-                        - Avoid giant paragraphs
-                        - Keep notes educational and revision-friendly
-                        - Expand important ideas when needed
-                        - Make it visually organized
+                        - Expand important ideas
+                        - Add educational explanations
+                        - Use proper markdown formatting
+                        - Use large section headings
+                        - Use subheadings where needed
+                        - Use bullet points extensively
+                        - Keep each section descriptive
+                        - Separate ideas properly
+                        - DO NOT compress everything
+                        - DO NOT create short summaries
+                        - DO NOT create giant paragraphs
+                        - Every important topic should have multiple bullet points
+                        - Add examples if useful
+                        - Make notes revision-friendly
                         
-                        Example:
+                        FORMAT RULES:
+                        - Use markdown headings (#)
+                        - Use markdown subheadings (##)
+                        - Use bullet points
+                        - Add blank lines between sections
                         
-                        # Topic Name
-                        - Detailed explanation
-                        - Important concept
+                        EXAMPLE STRUCTURE:
+                        
+                        # Introduction
+                        
+                        - Detailed explanation point
+                        - Important concept explanation
+                        - Additional learning insight
+                        
+                        # Main Concept
+                        
+                        - Concept explanation
+                        - Important detail
+                        - Example or application
                         
                         ## Subtopic
-                        - Important detail
-                        - Important detail
+                        
+                        - Detailed subtopic explanation
+                        - Important learning point
+                        
+                        Generate detailed professional study notes only.
                         """;
+
 
             case "key_takeaways":
                 return """
-                        Extract the most important insights from the transcript.
+                        Extract important insights into structured markdown notes.
                         
-                        Requirements:
+                        Formatting Rules:
                         - Use markdown headings
-                        - Use meaningful bullet points
-                        - Keep points concise but informative
-                        - Focus on practical learning
-                        - Organize takeaways by topic
-                        - Avoid vague statements
+                        - Add blank lines between sections
+                        - Use bullet points
+                        - Keep each point readable
+                        - Keep formatting clean
+                        - NEVER output one giant paragraph
                         
-                        Example:
+                        Correct Example:
                         
                         # Key Learnings
+                        
                         - Important insight
                         - Important insight
                         
                         # Practical Ideas
-                        - Important takeaway
+                        
+                        - Practical takeaway
                         """;
 
             case "exam_prep":
                 return """
-                        Create detailed exam preparation notes.
+                        Create DETAILED EXAM PREPARATION NOTES from this transcript.
                         
-                        Requirements:
-                        - Use markdown headings
-                        - Organize by concepts/topics
-                        - Use descriptive bullet points
-                        - Highlight important concepts
-                        - Make content revision-friendly
-                        - Include important definitions where useful
-                        - Expand key ideas clearly
+                        IMPORTANT:
+                        These are not short summaries.
+                        These should feel like actual revision notes students study before exams.
+                        
+                        REQUIREMENTS:
+                        - Use markdown formatting
+                        - Use detailed bullet points
+                        - Explain concepts clearly
+                        - Highlight important topics
+                        - Expand key ideas
+                        - Add definitions where useful
+                        - Organize content by topics
+                        - Keep sections educational
+                        - Avoid short shallow points
                         - Avoid giant paragraphs
+                        - Use headings and subheadings
+                        - Add revision-friendly structure
                         
-                        Example:
+                        FORMAT:
                         
-                        # Important Concepts
+                        # Important Topic
+                        
                         - Detailed explanation
+                        - Important concept
                         - Key revision point
                         
-                        # Definitions
-                        - Important term explanation
+                        ## Definition
                         
-                        # Key Points
-                        - Important exam-oriented note
+                        - Important definition
+                        
+                        ## Key Takeaways
+                        
+                        - Important learning point
+                        
+                        Generate detailed revision notes only.
                         """;
 
             case "summary":
             default:
                 return """
-                        Create detailed but concise study notes.
+                        Create detailed and structured markdown study notes.
                         
-                        Requirements:
-                        - Use proper markdown headings
-                        - Use bullet points
-                        - Explain ideas clearly
-                        - Keep information descriptive
-                        - Avoid one-line shallow points
-                        - Make it easy to revise later
-                        - Organize content into sections
+                        VERY IMPORTANT FORMATTING RULES:
+                        - Use ONLY valid markdown formatting
+                        - Add a blank line after every heading
+                        - Add a blank line before every heading
+                        - Use proper bullet points
+                        - Keep sections separated clearly
+                        - NEVER write everything in one paragraph
+                        - NEVER combine headings and bullets in same line
                         
-                        Example format:
+                        Correct Example:
                         
                         # Introduction
-                        - Detailed explanation point
-                        - Another important point
                         
-                        # Main Concepts
-                        - Explanation
-                        - Explanation
+                        - Point one
+                        - Point two
+                        
+                        # Key Concepts
+                        
+                        - Concept one
+                        - Concept two
+                        
+                        Generate clean markdown notes only.
                         """;
         }
     }

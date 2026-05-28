@@ -19,7 +19,15 @@ const exportTxtBtn = document.getElementById("exportTxtBtn");
 const exportPdfBtn = document.getElementById("exportPdfBtn");
 
 
-// ACTIVE TAB TRACKING
+// RAW MARKDOWN STORAGE
+let summaryMarkdown = "";
+
+let transcriptMarkdown = "";
+
+let translatedMarkdown = "";
+
+
+// ACTIVE RAW CONTENT
 let activeTabContent = "";
 
 
@@ -28,20 +36,38 @@ tabs.forEach(tab => {
 
     tab.addEventListener("click", () => {
 
-        tabs.forEach(t => t.classList.remove("active"));
+        tabs.forEach(t =>
+            t.classList.remove("active")
+        );
 
         document.querySelectorAll(".tab-content")
-            .forEach(content => content.classList.remove("active"));
+            .forEach(content =>
+                content.classList.remove("active")
+            );
 
         tab.classList.add("active");
 
-        const target = tab.getAttribute("data-tab");
+        const target =
+            tab.getAttribute("data-tab");
 
-        const targetElement = document.getElementById(target);
+        const targetElement =
+            document.getElementById(target);
 
         targetElement.classList.add("active");
 
-        activeTabContent = targetElement.textContent;
+        // UPDATE ACTIVE RAW MARKDOWN
+        if (target === "summaryTab") {
+
+            activeTabContent = summaryMarkdown;
+
+        } else if (target === "originalTab") {
+
+            activeTabContent = transcriptMarkdown;
+
+        } else if (target === "translatedTab") {
+
+            activeTabContent = translatedMarkdown;
+        }
     });
 });
 
@@ -56,7 +82,9 @@ copyBtn.addEventListener("click", async () => {
         copyBtn.textContent = "Copied!";
 
         setTimeout(() => {
+
             copyBtn.textContent = "Copy";
+
         }, 1500);
 
     } catch (error) {
@@ -67,6 +95,7 @@ copyBtn.addEventListener("click", async () => {
     }
 });
 
+
 // EXPORT TXT
 exportTxtBtn.addEventListener("click", () => {
 
@@ -74,12 +103,16 @@ exportTxtBtn.addEventListener("click", () => {
 
         const blob = new Blob(
             [activeTabContent],
-            { type: "text/plain" }
+            {
+                type: "text/plain"
+            }
         );
 
-        const url = URL.createObjectURL(blob);
+        const url =
+            URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
+        const a =
+            document.createElement("a");
 
         a.href = url;
 
@@ -101,12 +134,12 @@ exportTxtBtn.addEventListener("click", () => {
     }
 });
 
+
 // EXPORT BEAUTIFUL PDF
 exportPdfBtn.addEventListener("click", async () => {
 
     try {
 
-        // TEMPLATE ELEMENTS
         const pdfTemplate =
             document.getElementById("pdfTemplate");
 
@@ -129,7 +162,7 @@ exportPdfBtn.addEventListener("click", async () => {
         const language =
             document.getElementById("language").value || "Original";
 
-        // FILL TEMPLATE
+        // SET TEMPLATE CONTENT
         pdfMode.textContent = mode;
 
         pdfLanguage.textContent = language;
@@ -137,36 +170,91 @@ exportPdfBtn.addEventListener("click", async () => {
         pdfDate.textContent =
             new Date().toLocaleString();
 
+        // RENDER MARKDOWN TO HTML
         pdfContent.innerHTML =
-            marked.parse(activeTabContent);
+            marked.parse(activeTabContent, {
+                breaks: true,
+                gfm: true
+            });
+
+        // TEMPORARILY SHOW
+        pdfTemplate.style.opacity = "1";
+
+        pdfTemplate.style.zIndex = "9999";
+
+        // WAIT FOR FULL RENDER
+        await new Promise(resolve =>
+            setTimeout(resolve, 800)
+        );
 
         // HTML -> CANVAS
         const canvas = await html2canvas(pdfTemplate, {
-            scale: 2
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff"
         });
+
+        // HIDE AGAIN
+        pdfTemplate.style.opacity = "0.01";
+
+        pdfTemplate.style.zIndex = "-9999";
 
         const imgData =
             canvas.toDataURL("image/png");
 
         const { jsPDF } = window.jspdf;
 
-        const pdf = new jsPDF("p", "mm", "a4");
+        const pdf =
+            new jsPDF("p", "mm", "a4");
 
         const pdfWidth =
             pdf.internal.pageSize.getWidth();
 
         const pdfHeight =
-            (canvas.height * pdfWidth) / canvas.width;
+            pdf.internal.pageSize.getHeight();
 
+        const imgWidth = pdfWidth;
+
+        const imgHeight =
+            (canvas.height * imgWidth) / canvas.width;
+
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        // FIRST PAGE
         pdf.addImage(
             imgData,
             "PNG",
             0,
-            0,
-            pdfWidth,
-            pdfHeight
+            position,
+            imgWidth,
+            imgHeight
         );
 
+        heightLeft -= pdfHeight;
+
+        // MULTI PAGE SUPPORT
+        while (heightLeft > 0) {
+
+            position =
+                heightLeft - imgHeight;
+
+            pdf.addPage();
+
+            pdf.addImage(
+                imgData,
+                "PNG",
+                0,
+                position,
+                imgWidth,
+                imgHeight
+            );
+
+            heightLeft -= pdfHeight;
+        }
+
+        // SAVE
         pdf.save("yt-ai-notes.pdf");
 
     } catch (error) {
@@ -242,18 +330,37 @@ generateBtn.addEventListener("click", async () => {
             return;
         }
 
-        // UPDATE CONTENT
-        summaryTab.textContent =
+        // STORE RAW MARKDOWN
+        summaryMarkdown =
             data.summary || "No summary available.";
 
-        originalTab.textContent =
+        transcriptMarkdown =
             data.originalTranscript || "No transcript available.";
 
-        translatedTab.textContent =
+        translatedMarkdown =
             data.translatedTranscript || "No translation available.";
 
-        // DEFAULT ACTIVE CONTENT
-        activeTabContent = summaryTab.textContent;
+        // RENDER MARKDOWN
+        summaryTab.innerHTML =
+            marked.parse(summaryMarkdown, {
+                breaks: true,
+                gfm: true
+            });
+
+        originalTab.innerHTML =
+            marked.parse(transcriptMarkdown, {
+                breaks: true,
+                gfm: true
+            });
+
+        translatedTab.innerHTML =
+            marked.parse(translatedMarkdown, {
+                breaks: true,
+                gfm: true
+            });
+
+        // DEFAULT ACTIVE TAB CONTENT
+        activeTabContent = summaryMarkdown;
 
         result.classList.remove("hidden");
 
